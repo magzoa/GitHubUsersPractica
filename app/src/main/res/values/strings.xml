@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GitHubUsersPractica</string>
+    <string name="error_msj">Hubo un error inesperado! \n</string>
 </resources>
