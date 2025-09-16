@@ -74,7 +74,10 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Use
 
 
 
-        ArrayAdapter<String> adapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1,users);
+        //ArrayAdapter<String> adapter=new ArrayAdapter(this, android.R.layout.simple_list_item_1,users);
+
+
+        UserAdapter adapter=new UserAdapter(this,users);
 
         usersListView.setAdapter(adapter);
 
