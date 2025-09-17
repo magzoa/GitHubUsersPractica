@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -27,7 +28,9 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Use
     ProgressBar progressBar;
     ListView usersListView;
     TextView errorTextView;
+    Button reintentarButton;
 
+    UserServicio servicio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Use
         progressBar=findViewById(R.id.progressBar);
         usersListView=findViewById(R.id.listViewUsers);
         errorTextView=findViewById(R.id.textViewError);
-
+        reintentarButton =findViewById(R.id.buttonReintentar);
 
 
 
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Use
                 .setEndpoint("https://api.github.com")
                 .build();
 
-        UserServicio servicio=restAdapter.create(UserServicio.class);
+         servicio=restAdapter.create(UserServicio.class);
 
 
         servicio.getUsers(this);
@@ -90,7 +93,20 @@ public class MainActivity extends AppCompatActivity implements Callback<List<Use
         //Log.e("GITHUB",error.getLocalizedMessage());
     progressBar.setVisibility(View.GONE);
     errorTextView.setVisibility(View.VISIBLE);
-    errorTextView.setText(getString(R.string.error_msj)+"\n"+error.getLocalizedMessage());
+    errorTextView.setText(getString(R.string.error_msj)+" \n"+error.getLocalizedMessage());
+
+    reintentarButton.setVisibility(View.VISIBLE);
+
+    }
+
+    public void reintentar(View view) {
+
+reintentarButton.setVisibility(View.GONE);
+errorTextView.setVisibility(View.GONE);
+progressBar.setVisibility(View.VISIBLE);
+servicio.getUsers(this);
+
+
 
 
     }
